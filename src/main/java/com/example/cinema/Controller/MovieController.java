@@ -40,11 +40,11 @@ public class MovieController {
     }
 
     @PostMapping("/movies")
-    public void addMovie(@RequestBody Movie mv){ movieService.addMovie(mv); }
+    public List<Movie> createMovies(@RequestBody List<Movie> movies){ return movieService.createMovies(movies); }
 
     @PutMapping("/movies")
-    public List<Movie> addMovie(@RequestBody  List<Movie> mv){
-        return movieService.createOrUpdateMovie(mv);
+    public List<Movie> updateMovies(@RequestBody  List<Movie> mv){
+        return movieService.updateMovies(mv);
     }
 
 

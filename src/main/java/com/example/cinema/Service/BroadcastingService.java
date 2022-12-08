@@ -8,11 +8,14 @@ import com.example.cinema.Repository.MovieRepository;
 import com.example.cinema.Repository.RoomRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -20,9 +23,10 @@ public class BroadcastingService {
    private final BroadcastRepository broadcast;
    private final MovieRepository movieRepository;
    private final RoomRepository roomRepository;
-
-   public List<Broadcasting> getAllBroadcasting(){
-      return broadcast.findAll();
+   private final Broadcasting broadcasting;
+   public List<Broadcasting> getAllBroadcasting(Integer page, Integer pageSize){
+      Pageable pageable = PageRequest.of(page - 1, pageSize);
+      return broadcast.findAll(pageable).stream().collect(Collectors.toList());
    }
 
    public Broadcasting addBroadcasting(PostBcRequest bc){

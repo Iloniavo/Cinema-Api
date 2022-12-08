@@ -1,9 +1,6 @@
 package com.example.cinema.Model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -15,7 +12,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Builder
 @Entity
 public class Movie implements Serializable {
     @Id

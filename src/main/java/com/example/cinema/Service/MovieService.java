@@ -30,7 +30,7 @@ public class MovieService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         }
-    public List<Movie> createOrUpdateMovie(List<Movie> mv){
+    public List<Movie> updateMovies(List<Movie> mv){
         return movieRepository.saveAll(mv);
     }
 
@@ -39,8 +39,8 @@ public class MovieService {
     }
 
 
-    public void addMovie(Movie mv){
-        movieRepository.save(mv);
+    public List<Movie> createMovies(List<Movie> mv){
+        return movieRepository.saveAll(mv);
     }
 
     public Movie getMovieById(Integer id){

@@ -1,12 +1,6 @@
 package com.example.cinema.Model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import net.minidev.json.annotate.JsonIgnore;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,7 +14,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Builder
 @Entity
 public class Broadcasting implements Serializable {
     @Id
@@ -28,19 +22,13 @@ public class Broadcasting implements Serializable {
     private Integer id;
 
     @ManyToOne
-    @JsonIgnore
-    @JoinColumn()
     private Movie movie;
 
     @ManyToOne
-    @JsonIgnore
-    @JoinColumn()
     private Room room;
 
-    @Column()
     private LocalDate date;
 
-    @Column()
     private LocalTime time;
 
 }

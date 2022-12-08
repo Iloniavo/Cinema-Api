@@ -21,8 +21,8 @@ public class BroadcastingController {
     }
 
     @GetMapping("/broadcasts")
-    public List<Broadcasting> getAllBroadcastings(){
-        return broadcastingService.getAllBroadcasting();
+    public List<Broadcasting> getAllBroadcastings(@RequestParam Integer page,@RequestParam Integer pageSize){
+        return broadcastingService.getAllBroadcasting(page, pageSize);
     }
 
     @GetMapping("/broadcast/{id}")
