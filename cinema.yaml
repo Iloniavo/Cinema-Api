@@ -1,0 +1,392 @@
+openapi: 3.0.1
+info: 
+  title: STD21020 Cinema API
+  description: 'Global description of a cinema api'
+  version: 1.0.0
+servers:
+  - url : https://STD21020.cinema.com
+tags:
+  - name: Room
+  - name: Movie
+  - name: Broadcasting
+paths:
+  /room:
+    get:
+      tags:
+        - Room
+      operationId: get room
+      summary: Get all rooms
+      description: Get all rooms
+      parameters : 
+        - name : page
+          in : query 
+          schema : 
+             type : integer
+      responses:
+        200: 
+          description: List of rooms
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Room'
+        400:
+          description: Bad request
+    
+  /room/{id}:
+    get:
+      tags:
+        - Room
+      summary: get a room
+      description: Get a room by id
+      parameters:
+        - name: Id
+          in: path
+          schema: 
+            type: integer
+          required: true  
+      responses:
+        200:
+          description: Here's your room
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Room'
+        400: 
+          description: Bad request
+        404: 
+          description: Room not found
+
+  /movies:
+    get:
+      tags:
+        - Movie
+      operationId: get movie
+      summary: Get all movies
+      description: Get all movies 
+      responses: 
+        200: 
+          description: Here's all movies
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref: '#/components/schemas/Movie'
+        400: 
+          description: Bad request
+    post: 
+      tags:
+        - Movie
+      operationId: add movie
+      summary: Add a new movie
+      description: Add a new movie
+      requestBody:
+        description: Movie to be added
+        content:
+          application/json:
+            schema:  
+              $ref: '#/components/schemas/AddMovie'
+        required: true
+      responses:
+        201:
+          description: Movie added
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  $ref : '#/components/schemas/Movie'
+        400:
+          description: Bad  request
+    put:
+      tags:
+        - Movie
+      summary: Change movie's information
+      description: Change movie's information
+      requestBody: 
+        description: Change information
+        content :
+           application/json:
+            schema: 
+                $ref: '#/components/schemas/Movie'
+      responses:
+        202:
+          description: Information(s) changed
+        400: 
+          description: Bad request
+        404:
+          description: Movie not found
+    delete:
+      tags:
+        - Movie
+      summary : Delete movies
+      description: delete movies
+      parameters:
+        - name: id_movie
+          in: query
+          schema: 
+            type: array
+      responses:
+        200:
+          description: delete succesfully
+        400:
+          description: Bad request
+        404: 
+          description: Movie(s) not found
+  /movie/{id_movie}:
+    get: 
+      tags:
+        - Movie
+      summary: get movie
+      description: get movie by Id
+      parameters:
+        - name: id_movie
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        200: 
+          description : Here's your student
+          content: 
+            application/json:
+                schema :
+                  type : array
+                  items :
+                    $ref: '#/components/schemas/Movie'
+        400 : 
+          description: Bad request
+        404 : 
+          description : Entity not found
+    delete :
+      tags :
+      - Movie
+      summary : Delete a movie
+      description : Delete a movie by id
+      parameters :
+      - name : id
+        in : path
+        schema :
+          type : integer
+        required: true
+      responses :
+        200 : 
+          description : Delete succesfully
+        400 : 
+          description : Bad request
+        404 : 
+          description : Entity not found
+  /movie/{title}:
+    get: 
+      tags:
+        - Movie
+      summary: get movie
+      description: get movie by Id
+      parameters:
+        - name: title
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        200: 
+          description : Here's your student
+          content: 
+            application/json:
+                schema :
+                  type : array
+                  items :
+                    $ref: '#/components/schemas/Movie'
+        400 : 
+          description: Bad request
+        404 : 
+          description : Entity not found
+  /movies/{category_label}:
+    get: 
+      tags:
+        - Movie 
+      summary: get all movies in a category
+      description: get all movies in a category 
+      parameters:
+        - name: category_label
+          in: path
+          schema: 
+            type: string
+          required: true 
+      responses:
+        200: 
+          description: Here's your movies
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Movie'
+        400: 
+          description: Bad request
+        404: 
+          description: Category not found
+  
+  /broadcasts:
+    get:
+      tags:
+        - Broadcasting
+      operationId: get broadcasting
+      summary: Get all broadcasting
+      description: Get all movies
+      responses:
+        200: 
+          description: Here's all broadcasting
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Broadcasting'
+        400: 
+          description: Bad request
+    post: 
+      tags:
+        - Broadcasting
+      operationId: add broadcast
+      summary: Add a new broadcasting
+      description: Add a new broadcasting
+      requestBody:
+        description: Broadcast to be added
+        content:
+          application/json:
+            schema:  
+              $ref: '#/components/schemas/CreateBroadcast'
+        required: true
+      responses:
+        201:
+          description: Broadcast added
+        400:
+          description: Bad request
+    put:
+      tags:
+        - Broadcasting
+      summary: Change broadcasting's information
+      description: Change broadcasting's information
+      requestBody: 
+        description: Change information
+        content :
+           application/json:
+            schema: 
+                $ref: '#/components/schemas/Broadcasting'
+            
+      responses:
+        202:
+          description: Information(s) changed
+        400: 
+          description: Bad request
+        404:
+          description: Broadcast not found
+    delete:
+      tags:
+        - Broadcasting
+      summary : Delete broadcast
+      description: delete broadcast
+      parameters:
+        - name: id_broadcast
+          in: query
+          schema: 
+            type: array
+      responses:
+        200:
+          description: delete succesfully
+        400:
+          description: Bad request
+        404: 
+          description: Broadcast(s) not found
+  /broadcasts/{date}:
+    get:
+      tags:
+        - Broadcasting
+      operationId: get broadcasting
+      summary: Get all broadcasting by broadcasting date 
+      description: Get all movies
+      responses:
+        200: 
+          description: Here's all broadcasting
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Broadcasting'
+        400: 
+          description: Bad request
+components:
+  schemas:
+    Room:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        capacity:
+          type: integer  
+    AddMovie: 
+      type: object
+      properties:
+        title:
+          type: string
+          example: Jumanji
+        category: 
+          type: string
+          example: romance
+        duration:
+          type: string
+          format: time
+          example: "01:32:00"
+        resume:
+          type: string
+          example: "Lorem ipsum"
+        producer:
+          type: string
+          example: "Jean Dupont"
+        release_date:
+          type: string
+          format: date
+          example: "12-22-2022"
+    Movie: 
+      allOf:
+        - $ref: '#/components/schemas/AddMovie'
+      type: object
+      properties:
+        id_movie:
+          type: integer
+          example: 12
+
+    CreateBroadcast:
+       type: object
+       properties:
+        movie_broadcast: 
+          allOf:
+            - $ref: '#/components/schemas/Movie'
+          type: object
+        broadcast_time:
+          type: string
+          format: date- time
+        room: 
+          allOf:
+            - $ref: '#/components/schemas/Room'     
+    Broadcasting:
+      allOf:
+        - $ref: '#/components/schemas/CreateBroadcast'
+      properties:
+        id_braodcast:
+          type: integer
+    
+  
+          
+            
+        
+    
+      
+            
