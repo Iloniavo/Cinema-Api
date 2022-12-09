@@ -17,7 +17,7 @@ public class MovieRestMapper {
                 .build();
     }
 
-    public Movie toCreate(MovieRequest domain){
+    public Movie toCreateOrUpdate(MovieRequest domain){
         return Movie.builder()
                 .title(domain.getTitle())
                 .category(domain.getCategory())

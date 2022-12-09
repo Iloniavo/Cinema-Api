@@ -14,7 +14,6 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostBcRequest {
-
     public String title;
     public LocalDate date;
     public LocalTime time;

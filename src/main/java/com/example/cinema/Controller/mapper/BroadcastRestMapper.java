@@ -25,7 +25,7 @@ public class BroadcastRestMapper {
                 .build();
     }
 
-    public Broadcasting toCreate(BroadcastRequest domain){
+    public Broadcasting toCreateOrUpdate(BroadcastRequest domain){
         Movie movie = movieService.getMovieById(domain.getMovie_id());
         Room room = roomService.getRoomById(domain.getRoom_id());
         return Broadcasting.builder()

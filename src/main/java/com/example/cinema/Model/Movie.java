@@ -19,13 +19,10 @@ public class Movie implements Serializable {
     @GeneratedValue(strategy = IDENTITY)
     private Integer id;
 
-    @Column()
     private String title;
 
-    @Column()
     private String category;
 
-    @Column
     private String duration;
 
     @Column(length = 500)
